@@ -106,7 +106,7 @@ def scrape_steamidio(steam_profile_url):
     response = requests.post(STEAMID_IO_URL, data={'input': steam_profile_url})
     soup = BeautifulSoup(response.text, features='html.parser')
     data = [item.text.strip('\n').strip() for item in soup.select('dd')]
-    steam_id, steam_id_3, steam_id_64, custom_url, profile_state, profile_created, name, location, status, profile = data
+    steam_id, steam_id_3, steam_id_64, custom_url, profile_state, profile_created, _, location, status, profile = data
     data = {
         'steam_id': steam_id,
         'steam_id_3': steam_id_3,
@@ -114,7 +114,6 @@ def scrape_steamidio(steam_profile_url):
         'custom_url': custom_url,
         'profile_state': profile_state,
         'profile_created': profile_created,
-        'name': name,
         'location': location,
         'status': status,
         'profile_url': profile
