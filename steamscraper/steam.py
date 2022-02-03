@@ -106,7 +106,12 @@ def scrape_steamidio(steam_profile_url):
     response = requests.post(STEAMID_IO_URL, data={'input': steam_profile_url})
     soup = BeautifulSoup(response.text, features='html.parser')
     data = [item.text.strip('\n').strip() for item in soup.select('dd')]
-    steam_id, steam_id_3, steam_id_64, custom_url, profile_state, profile_created, _, location, status, profile = data
+    steam_id, steam_id_3, steam_id_64, custom_url, profile_state, profile_created, name, location, status, profile = data
+
+    # name is left out of data because on steamidio it messes up the name when users use non-standard text characters like 𝔽𝕣𝕠𝕤𝕥𝕪. 
+    # It transforms those character into question marks like "???????????" for some reason.
+    # name is collected from the scrape_steam_profile function instead to avoid this.
+    # DO NOT ADD name BACK TO THIS DATA DICT. 
     data = {
         'steam_id': steam_id,
         'steam_id_3': steam_id_3,

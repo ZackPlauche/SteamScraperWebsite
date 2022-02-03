@@ -13,9 +13,7 @@ def results(request):
     if steam_url and steam_profile_url_is_valid(steam_url):
         try:
             steam_profile = SteamProfile.from_url(steam_url)
-            print(steam_profile)
             data = steam_profile.to_json()
-            print(data)
             context = {'data': data}
             return render(request, 'results.html', context)
         except Exception as e:
@@ -25,5 +23,5 @@ def results(request):
             messages.error(request, f'{feedback} {feedforward}')
             return redirect('home')
     else:
-        messages.error(request, 'You must enter a Steam Profile URL')
+        messages.error(request, 'You must enter a valid Steam profile URL.')
         return redirect('home')

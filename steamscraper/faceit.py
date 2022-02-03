@@ -29,7 +29,7 @@ def scrape_faceitfinder(steam_id_64):
             'csgo_last_2_weeks_hours': faceit_list_values[4],
             'csgo_achievements': faceit_list_values[5],
             'csgo_banned_friends': faceit_list_values[6],
-            'csgo_username': csgo_username.text,
+            'csgo_username': csgo_username.text if csgo_username else None,
             'faceit_skill_level': re.findall(r'\d+', csgo_skill_level.img.get('src'))[0] if csgo_username else None,
             'csgo_matches': csgo_stats[0] if csgo_stats else None,
             'csgo_elo': csgo_stats[1] if csgo_stats else None,
