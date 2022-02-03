@@ -38,4 +38,4 @@ LOGGING = {
     }
 }
 
-django_on_heroku.settings(locals(), staticfiles=False)
+django_on_heroku.settings(locals())
